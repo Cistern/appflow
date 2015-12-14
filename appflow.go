@@ -54,3 +54,13 @@ func (d *Destination) Emit(r *http.Request) {
 	}
 	json.NewEncoder(d.conn).Encode(flowData)
 }
+
+// Decode unmarshals JSON-encoded HTTPFlowData from b.
+func Decode(b []byte) (*HTTPFlowData, error) {
+	var flowData HTTPFlowData
+	err := json.Unmarshal(b, &flowData)
+	if err != nil {
+		return nil, err
+	}
+	return &flowData, nil
+}
